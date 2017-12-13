@@ -7,6 +7,7 @@ INSTALL_DIR ?= /opt/rocm/hipDNN
 
 HIPCC = ${HIP_PATH}/bin/hipcc
 
+CPPFLAGS += $(shell $(HIP_PATH)/bin/hipconfig --cpp_config)
 ifeq (${HIP_PLATFORM}, nvcc)
 INCLUDE_DIR = /usr/local/cudnn-6.0/cuda/include/
 
@@ -29,7 +30,6 @@ LDFLAGS = -lm -lMIOpen
 SOURCEDIR = src/hcc_detail
 endif
 
-CPPFLAGS += $(shell $(HIP_PATH)/bin/hipconfig --cpp_config)
 COMMONFLAGS = -fPIC
 
 SOURCESLIST := $(shell find $(SOURCEDIR) -name '*.cpp')
